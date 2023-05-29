@@ -85,25 +85,25 @@ RHs:=Matrix([[MonomialCoefficient(Quart, m)]  : m in mons]);
 SubRHs:=Submatrix(RHs,1,1,11,1);
 qcoeff:=Cof*SubRHs;
 I:=Ideal(Eltseq(Mat*qcoeff-det*RHs));
-
-
-
-/*
-minors:=Minors(Mat,12);
-I:=Ideal(minors);
 S:=quo<R|I>;
-K:=Basis(Kernel(ChangeRing(Transpose(Mat),S)))[1];
-q200:=K[1];
-q201:=K[2];
-q202:=K[3];
-q211:=K[4];
-q212:=K[5];
-q300:=K[6];
-q301:=K[7];
-q302:=K[8];
-q311:=K[9];
-q312:=K[10];
-q322:=K[11];
-q2:=Matrix(R, [[q200,q201, q202], [q201, q211, q212], [q202, q212,0]]  );
-q3:=Matrix(R, [[q300,q301, q302], [q301, q311, q312], [q302, q312,q322]]);
-*/
+
+q200v:=qcoeff[1,1];
+q201v:=qcoeff[2,1];
+q202v:=qcoeff[3,1];
+q211v:=qcoeff[4,1];
+q212v:=qcoeff[5,1];
+q300v:=qcoeff[6,1];
+q301v:=qcoeff[7,1];
+q302v:=qcoeff[8,1];
+q311v:=qcoeff[9,1];
+q312v:=qcoeff[10,1];
+q322v:=qcoeff[11,1];
+q2:=Matrix(R, [[q200v,q201v, q202v], [q201v, q211v, q212v], [q202v, q212v,0]]  );
+q3:=Matrix(R, [[q300v,q301v, q302v], [q301v, q311v, q312v], [q302v, q312v,q322v]]);
+
+for i in [1..1] do
+	bit:=Matrix(R, 3,1, bitangents[i]);
+	Lhs:=[bit*Matrix(RSpace(R,3).j): j in [1..3]];
+	Lhs:=[l+Transpose(l): l in Lhs];
+	Mat:=Matrix([[Eltseq(l)[i]: i in [1,2,3,5,6,9]]: l in Lhs cat [q0, q1, q2, q3]]  );
+end for;
